@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cannabis.Api", "Cannabis.Api\Cannabis.Api.csproj", "{86E2EF21-8CE7-4E14-84A9-59126CF511DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cannabis.Core", "Cannabis.Core\Cannabis.Core.csproj", "{80913559-EE69-462D-B206-631016CFE31E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cannabis.Infrastructure", "Cannabis.Infrastructure\Cannabis.Infrastructure.csproj", "{0A60E531-A444-4B0A-B7D6-3BD85CD8436D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86E2EF21-8CE7-4E14-84A9-59126CF511DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E2EF21-8CE7-4E14-84A9-59126CF511DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E2EF21-8CE7-4E14-84A9-59126CF511DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E2EF21-8CE7-4E14-84A9-59126CF511DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80913559-EE69-462D-B206-631016CFE31E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80913559-EE69-462D-B206-631016CFE31E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80913559-EE69-462D-B206-631016CFE31E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80913559-EE69-462D-B206-631016CFE31E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A60E531-A444-4B0A-B7D6-3BD85CD8436D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A60E531-A444-4B0A-B7D6-3BD85CD8436D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A60E531-A444-4B0A-B7D6-3BD85CD8436D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A60E531-A444-4B0A-B7D6-3BD85CD8436D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
