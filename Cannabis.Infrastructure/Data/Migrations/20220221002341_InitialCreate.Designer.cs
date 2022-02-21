@@ -2,6 +2,7 @@
 using Cannabis.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,14 +10,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cannabis.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20220221002341_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.2");
 
-            modelBuilder.Entity("Cannabis.Core.Entities.ProdcutBrand", b =>
+            modelBuilder.Entity("Cannabis.Core.Entities.ProductBrand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -27,7 +29,7 @@ namespace Cannabis.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProdcutBrands");
+                    b.ToTable("ProductBrands");
                 });
 
             modelBuilder.Entity("Cannabis.Core.Entities.Product", b =>
@@ -41,7 +43,7 @@ namespace Cannabis.Infrastructure.Data.Migrations
                         .HasMaxLength(180)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("IdProdcutBrand")
+                    b.Property<int>("IdProductBrand")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("IdProductType")
@@ -61,7 +63,7 @@ namespace Cannabis.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdProdcutBrand");
+                    b.HasIndex("IdProductBrand");
 
                     b.HasIndex("IdProductType");
 
@@ -84,9 +86,9 @@ namespace Cannabis.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Cannabis.Core.Entities.Product", b =>
                 {
-                    b.HasOne("Cannabis.Core.Entities.ProdcutBrand", "ProdcutBrand")
+                    b.HasOne("Cannabis.Core.Entities.ProductBrand", "ProductBrand")
                         .WithMany()
-                        .HasForeignKey("IdProdcutBrand")
+                        .HasForeignKey("IdProductBrand")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -96,7 +98,7 @@ namespace Cannabis.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProdcutBrand");
+                    b.Navigation("ProductBrand");
 
                     b.Navigation("ProductType");
                 });
