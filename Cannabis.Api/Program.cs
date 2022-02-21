@@ -14,8 +14,8 @@ public class Program
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
             try
             {
-                var context = services.GetRequiredService<IStoreContext>();
-                await ((StoreContext)context).Database.MigrateAsync();
+                var context = services.GetRequiredService<StoreContext>();
+                await context.Database.MigrateAsync();
                 await StoreContextSeed.SeedAsync(context, loggerFactory);
             }
             catch(Exception ex)

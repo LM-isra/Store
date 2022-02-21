@@ -7,14 +7,12 @@ namespace Cannabis.Infrastructure.Data.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private readonly IStoreContext _context;
+    private readonly StoreContext _context;
     
-    public ProductRepository(IStoreContext context) => _context = context;
+    public ProductRepository(StoreContext context) => _context = context;
 
     public async Task<Product> Get(int id) => await _context.Products
-        .Include(x => x.ProductType)
-        .Include(x => x.ProductBrand)
-        .FirstOrDefaultAsync(x => x.Id == id);
+        .Include(x => x.ProductType).Include(x => x.ProductBrand).FirstOrDefaultAsync(x => x.Id == id);
 
     public async Task<IReadOnlyList<Product>> Get() =>  await _context.Products
         .Include(x => x.ProductType)

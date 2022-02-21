@@ -2,9 +2,9 @@ namespace Cannabis.Infrastructure.Data.Context;
 
 public partial class StoreFactory : IStoreFactory
 {
-    private readonly IStoreContext _context;
+    private readonly StoreContext _context;
 
-    public StoreFactory(IStoreContext context) => _context = context;
+    public StoreFactory(StoreContext context) => _context = context;
 
     public void Dispose() => _context.Dispose();
 

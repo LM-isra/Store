@@ -1,5 +1,6 @@
 using Microsoft.OpenApi.Models;
 using Cannabis.Infrastructure.Kernel;
+using Cannabis.Api.Helpers;
 
 namespace API;
 
@@ -16,6 +17,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddServices();
+        services.AddAutoMapper(typeof(MappingProfiles));
         services.AddControllers();
         services.AddSwaggerGen(c =>
         {
@@ -35,6 +37,7 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseRouting();
+        app.UseStaticFiles();
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {

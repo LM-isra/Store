@@ -3,7 +3,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace Cannabis.Infrastructure.Data.Context;
 
-public partial class StoreContext : DbContext, IStoreContext
+public partial class StoreContext : DbContext, IStoreContextDbSets, IDisposable
+
 {
     private readonly IConfiguration _config;
 

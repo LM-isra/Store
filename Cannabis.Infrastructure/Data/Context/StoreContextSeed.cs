@@ -6,7 +6,7 @@ namespace Cannabis.Infrastructure.Data.Context;
 
 public class StoreContextSeed 
 {
-    public static async Task SeedAsync(IStoreContext context, ILoggerFactory loggerFactory)
+    public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
     {
         try
         {

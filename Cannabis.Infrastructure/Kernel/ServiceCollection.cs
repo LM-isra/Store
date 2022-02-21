@@ -11,9 +11,11 @@ public static class ServiceCollection
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddScoped<IStoreContext, StoreContext>();
+        services.AddDbContext<StoreContext>();
         services.AddScoped<IStoreFactory, StoreFactory>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         return services; 
     }
 }
