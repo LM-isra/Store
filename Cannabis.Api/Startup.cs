@@ -1,8 +1,10 @@
 using Microsoft.OpenApi.Models;
-using Cannabis.Infrastructure.Kernel;
+using Cannabis.Infrastructure.Data.Context;
+using Cannabis.Api.Extensions;
+using Cannabis.Api.Middleware;
 using Cannabis.Api.Helpers;
 
-namespace API;
+namespace Cannabis.Api;
 
 public class Startup
 {
@@ -16,25 +18,19 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddServices();
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddControllers();
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
-        });
+        services.AddDbContext<StoreContext>();
+        services.AddApplicationServices();
+        services.AddSwaggerDocumentation();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
-        }
-
+        app.UseMiddleware<ExceptionMiddleware>();
+        app.UseSwaggerDocumentation();
+        app.UseStatusCodePagesWithReExecute("/errors/{0}");
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseStaticFiles();

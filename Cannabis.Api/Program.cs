@@ -1,7 +1,7 @@
 using Cannabis.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace API;
+namespace Cannabis.Api;
 
 public class Program
 {

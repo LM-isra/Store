@@ -3,13 +3,12 @@ using Cannabis.Api.Dtos;
 using Cannabis.Core.Entities;
 using Cannabis.Core.Specifitactions;
 using Cannabis.Core.Interfaces.Repositories;
+using Cannabis.Api.Errors;
 using AutoMapper;
 
 namespace Cannabis.Api.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ProductsController :  ControllerBase
+public class ProductsController :  BaseApiController
 {
     private readonly IGenericRepository<Product> _product;
     private readonly IGenericRepository<ProductBrand> _brand;
@@ -29,27 +28,27 @@ public class ProductsController :  ControllerBase
     public async Task<ActionResult<IReadOnlyList<ProductDto>>> Get()
     {
         var products = await _product.ListAsync(new ProductsSpecification());
-        return !products.Any() ? NotFound() : Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
+        return !products.Any() ? NotFound(new ApiResponse(404)) : Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductDto>> Get(int id)
     {
         var product = await _product.GetEntityWithSpec(new ProductsSpecification(id));
-        return product == null ? NotFound() : Ok(_mapper.Map<Product, ProductDto>(product));
+        return product == null ? NotFound(new ApiResponse(404)) : Ok(_mapper.Map<Product, ProductDto>(product));
     }
 
     [HttpGet("brands")]
     public async Task<ActionResult<List<ProductBrand>>> GetBrands()
     {
         var data = await _brand.ListAllAsync();
-        return !data.Any() ? NotFound() : Ok(data);
+        return !data.Any() ? NotFound(new ApiResponse(404)) : Ok(data);
     }
 
     [HttpGet("types")]
     public async Task<ActionResult<List<ProductType>>> GetTypes()
     {
         var data = await _type.ListAllAsync();
-        return !data.Any() ? NotFound() : Ok(data);
+        return !data.Any() ? NotFound(new ApiResponse(404)) : Ok(data);
     }
 }
