@@ -23,6 +23,7 @@ public class Startup
         services.AddDbContext<StoreContext>();
         services.AddApplicationServices();
         services.AddSwaggerDocumentation();
+        services.AddCorsPolicy();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +35,7 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseStaticFiles();
+        app.UseCors("CorsPolicy");
         app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {

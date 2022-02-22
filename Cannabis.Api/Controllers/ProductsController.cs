@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace Cannabis.Api.Controllers;
 
-public class ProductsController :  BaseApiController
+public class ProductsController : BaseApiController
 {
     private readonly IGenericRepository<Product> _product;
     private readonly IGenericRepository<ProductBrand> _brand;
@@ -16,7 +16,7 @@ public class ProductsController :  BaseApiController
     private readonly IMapper _mapper;
 
     public ProductsController(IGenericRepository<Product> product, IGenericRepository<ProductBrand> brand, IGenericRepository<ProductType> type, IMapper mapper)
-    
+
     {
         _product = product;
         _brand = brand;
@@ -25,16 +25,22 @@ public class ProductsController :  BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<ProductDto>>> Get()
+    public async Task<ActionResult<Pagination<ProductDto>>> Get([FromQuery] ProductParams productParams)
     {
-        var products = await _product.ListAsync(new ProductsSpecification());
-        return !products.Any() ? NotFound(new ApiResponse(404)) : Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products));
+        var spec = new ProductSpec(productParams);
+        var products = await _product.ListAsync(spec);
+        if (!products.Any()) return NotFound(new ApiResponse(404));
+        var count = new ProductCount(productParams);
+        var totalItems = await _product.CountAsync(count);
+        var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products);
+
+        return Ok(new Pagination<ProductDto> (productParams.PageIndex, productParams.PageSize, totalItems, data));
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductDto>> Get(int id)
     {
-        var product = await _product.GetEntityWithSpec(new ProductsSpecification(id));
+        var product = await _product.GetEntityWithSpec(new ProductSpec(id));
         return product == null ? NotFound(new ApiResponse(404)) : Ok(_mapper.Map<Product, ProductDto>(product));
     }
 
