@@ -1,5 +1,4 @@
-using Microsoft.OpenApi.Models;
-using Cannabis.Infrastructure.Data.Context;
+ using Cannabis.Infrastructure.Data.Context;
 using Cannabis.Api.Extensions;
 using Cannabis.Api.Middleware;
 using Cannabis.Api.Helpers;
@@ -9,11 +8,7 @@ namespace Cannabis.Api;
 public class Startup
 {
     private readonly IConfiguration _config;
-    
-    public Startup(IConfiguration config)
-    {
-        _config = config;
-    }
+    public Startup(IConfiguration config) => _config = config;
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -37,9 +32,6 @@ public class Startup
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
         app.UseAuthorization();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
+        app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 }
