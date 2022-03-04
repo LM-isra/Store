@@ -1,4 +1,4 @@
- using Cannabis.Infrastructure.Data.Context;
+using Cannabis.Infrastructure.Data.Context;
 using Cannabis.Api.Extensions;
 using Cannabis.Api.Middleware;
 using Cannabis.Api.Helpers;

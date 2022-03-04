@@ -4,8 +4,8 @@ public class Pagination<T> where T : class
 {
     public Pagination(int pageIdex, int pageSize, int count, IEnumerable<T> data)
     {
-        PageSize = pageIdex;
-        PageIndex = pageSize;
+        PageSize = pageSize;
+        PageIndex = pageIdex;
         Count = count;
         Data = data;
     }

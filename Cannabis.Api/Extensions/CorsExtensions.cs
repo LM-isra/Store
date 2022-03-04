@@ -8,7 +8,7 @@ public static class CorsExtensions
         {
             opt.AddPolicy("CorsPolicy", policy =>
             {
-                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhjost:4200");
+                policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
             });
         });
 
