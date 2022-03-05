@@ -29,7 +29,6 @@ public class ProductsController : BaseApiController
     {
         var spec = new ProductSpec(productParams);
         var products = await _product.ListAsync(spec);
-        if (!products.Any()) return NotFound(new ApiResponse(404));
         var count = new ProductCount(productParams);
         var totalItems = await _product.CountAsync(count);
         var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductDto>>(products);

@@ -10,5 +10,5 @@ public class ProductParams
     public int? IdType { get; set; }
     public string Sort { get; set; }
     private string _search;
-    public string Search { get => _search; set => _search.ToLower(); }
+    public string Search { get => _search; set => _search = value.ToLower(); }
 }
