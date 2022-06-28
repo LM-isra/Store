@@ -2,6 +2,8 @@ using Cannabis.Infrastructure.Data.Context;
 using Cannabis.Api.Extensions;
 using Cannabis.Api.Middleware;
 using Cannabis.Api.Helpers;
+using StackExchange.Redis;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cannabis.Api;
 
@@ -10,18 +12,23 @@ public class Startup
     private readonly IConfiguration _config;
     public Startup(IConfiguration config) => _config = config;
 
-    // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddControllers();
-        services.AddDbContext<StoreContext>();
+        services.AddDbContext<StoreContext>(x 
+            => x.UseSqlite(_config.GetConnectionString("DefaulConnection")));
+        
+        services.AddSingleton<IConnectionMultiplexer>(c
+            => ConnectionMultiplexer.Connect(ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true)));
+
         services.AddApplicationServices();
         services.AddSwaggerDocumentation();
-        services.AddCorsPolicy();
+        services.AddCors(opt 
+            => opt.AddPolicy("CorsPolicy", policy
+                => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")));
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         app.UseMiddleware<ExceptionMiddleware>();
