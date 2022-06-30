@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cannabis.Api.Controllers;
 
-[Route("[controller]")]
 public class BasketController : BaseApiController
 {
     private readonly IBasketRepository _basketRepositoty;
