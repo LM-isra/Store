@@ -3,6 +3,8 @@ using Cannabis.Infrastructure.Data.Repositories;
 using Cannabis.Infrastructure.Data.Context;
 using Cannabis.Api.Errors;
 using Microsoft.AspNetCore.Mvc;
+using Cannabis.Core.Interfaces.Services;
+using Cannabis.Infrastructure.Data.Services;
 
 namespace Cannabis.Api.Extensions;
 
@@ -10,6 +12,7 @@ public static class ApplicationServicesExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IStoreFactory, StoreFactory>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();

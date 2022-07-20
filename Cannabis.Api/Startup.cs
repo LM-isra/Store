@@ -4,6 +4,7 @@ using Cannabis.Api.Middleware;
 using Cannabis.Api.Helpers;
 using StackExchange.Redis;
 using Microsoft.EntityFrameworkCore;
+using Cannabis.Infrastructure.Identity;
 
 namespace Cannabis.Api;
 
@@ -17,12 +18,16 @@ public class Startup
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddControllers();
         services.AddDbContext<StoreContext>(x 
-            => x.UseSqlite(_config.GetConnectionString("DefaulConnection")));
-        
+            => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+        services.AddDbContext<AppIdentityDbContext>(x 
+            => x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
+
         services.AddSingleton<IConnectionMultiplexer>(c
             => ConnectionMultiplexer.Connect(ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true)));
 
         services.AddApplicationServices();
+        services.AddIdentityServices(_config);
         services.AddSwaggerDocumentation();
         services.AddCors(opt 
             => opt.AddPolicy("CorsPolicy", policy
@@ -38,6 +43,7 @@ public class Startup
         app.UseRouting();
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
+        app.UseAuthentication();
         app.UseAuthorization();
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
