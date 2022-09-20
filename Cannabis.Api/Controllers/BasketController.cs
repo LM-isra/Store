@@ -1,3 +1,5 @@
+using AutoMapper;
+using Cannabis.Api.Dtos;
 using Cannabis.Core.Entities;
 using Cannabis.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +9,13 @@ namespace Cannabis.Api.Controllers;
 public class BasketController : BaseApiController
 {
     private readonly IBasketRepository _basketRepositoty;
+    private readonly IMapper _mapper;
 
-    public BasketController(IBasketRepository basketRepository) => _basketRepositoty = basketRepository;
+    public BasketController(IBasketRepository basketRepository, IMapper mapper) 
+    {
+        _basketRepositoty = basketRepository;
+        _mapper = mapper;
+    } 
 
     [HttpGet]
     public async Task<ActionResult<CustomerBasket>> GetBasketById(string id)
@@ -18,7 +25,12 @@ public class BasketController : BaseApiController
     }
     
     [HttpPost]
-    public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket) => Ok(await _basketRepositoty.UpdateBasketAsync(basket));
+    public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDto basket) 
+    {
+        var customerBasket = _mapper.Map<CustomerBasketDto, CustomerBasket>(basket);
+        var update = await _basketRepositoty.UpdateBasketAsync(customerBasket);
+        return Ok(update);
+    } 
     
     [HttpDelete]
     public async Task DeleteBasketAsync(string id) => await _basketRepositoty.DeleteBasketAsync(id);
