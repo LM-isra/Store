@@ -7,8 +7,8 @@ public class ProductSpec : BaseSpecification<Product>
     public ProductSpec(ProductParams productParams)
         : base(x =>
                 (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
-                (!productParams.IdBrand.HasValue || x.IdProductBrand == productParams.IdBrand) && 
-                (!productParams.IdType.HasValue || x.IdProductType == productParams.IdType))
+                (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) && 
+                (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId))
     {
         AddInclude(x => x.ProductBrand);
         AddInclude(x => x.ProductType);

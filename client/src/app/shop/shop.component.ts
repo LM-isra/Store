@@ -58,14 +58,14 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  onBrandSelected(idBrand: number){
-    this.shopParams.idBrand = idBrand;
+  onBrandSelected(brandId: number){
+    this.shopParams.brandId = brandId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }
 
-  onTypeSelected(idType: number){
-    this.shopParams.idType = idType;
+  onTypeSelected(typeId: number){
+    this.shopParams.typeId = typeId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
   }

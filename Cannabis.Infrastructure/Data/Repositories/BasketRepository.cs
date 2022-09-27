@@ -11,11 +11,11 @@ public class BasketRepository : IBasketRepository
 
     public BasketRepository(IConnectionMultiplexer redis) =>  _dataBase = redis.GetDatabase();
 
-    public async Task<bool> DeleteBasketAsync(string id) => await _dataBase.KeyDeleteAsync(id);
+    public async Task<bool> DeleteBasketAsync(string basketId) => await _dataBase.KeyDeleteAsync(basketId);
 
-    public async Task<CustomerBasket> GetBasketAsync(string id)
+    public async Task<CustomerBasket> GetBasketAsync(string basketId)
     {
-        var data = await _dataBase.StringGetAsync(id);
+        var data = await _dataBase.StringGetAsync(basketId);
         return data.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(data);
     }
 

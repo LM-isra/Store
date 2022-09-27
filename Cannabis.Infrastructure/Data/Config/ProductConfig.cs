@@ -14,11 +14,7 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
         builder.Property(x => x.Description).IsRequired().HasMaxLength(180);
         builder.Property(x => x.Price).HasColumnType("decimal(18,2)");
         builder.Property(x => x.PictureUrl).IsRequired();
-        
-        builder.HasOne(y => y.ProductBrand)
-            .WithMany().HasForeignKey(x => x.IdProductBrand);
-        
-        builder.HasOne(y => y.ProductType)
-            .WithMany().HasForeignKey(x => x.IdProductType);
+        builder.HasOne(y => y.ProductBrand).WithMany();
+        builder.HasOne(y => y.ProductType).WithMany();
     }
 }

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Cannabis.Core.Entities;
+using Cannabis.Core.Entities.OrderAggregate;
 using Microsoft.Extensions.Logging;
 
 namespace Cannabis.Infrastructure.Data.Context;
@@ -31,6 +32,14 @@ public class StoreContextSeed
                 var productsJson = await File.ReadAllTextAsync("..\\Cannabis.Infrastructure\\Data\\SeedData\\products.json");
                 var products = JsonSerializer.Deserialize<List<Product>>(productsJson);
                 await context.Products.AddRangeAsync(products);
+                await context.SaveChangesAsync();
+            }
+            
+            if(!context.DeliveryMethods.Any())
+            {
+                var dmJson = await File.ReadAllTextAsync("..\\Cannabis.Infrastructure\\Data\\SeedData\\delivery.json");
+                var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmJson);
+                await context.DeliveryMethods.AddRangeAsync(methods);
                 await context.SaveChangesAsync();
             }
         }
