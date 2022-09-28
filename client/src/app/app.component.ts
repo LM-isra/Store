@@ -11,7 +11,7 @@ import { BasketService } from './basket/basket.service';
 export class AppComponent implements OnInit {
   title = 'Skinet';
 
-  constructor(private basjetService: BasketService, private accountService: AccountService) { }
+  constructor(private basketService: BasketService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loadBasket();
@@ -22,15 +22,18 @@ export class AppComponent implements OnInit {
     const token = localStorage.getItem('token');
     this.accountService.loadCurrentUser(token).subscribe({
       next: () => console.log('loaded user'),
-      error: (e) => console.log(e)
+      error: error => console.log(error)
     })
   }
 
   loadBasket() {
     const basketId = localStorage.getItem('basket_id');
     if (basketId) {
-      this.basjetService.getBasket(basketId).subscribe({
-        error: error => { console.error(error) }
+      this.basketService.getBasket(basketId).subscribe(
+      {
+        next: () => {
+          console.log('initialised basket')},
+        error: error => console.error(error)
       });
     }
   }
