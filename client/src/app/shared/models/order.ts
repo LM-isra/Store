@@ -8,7 +8,7 @@ export interface IOrderToCreate {
 
 export interface IOrder {
     id: number;
-    buyerEamil: string;
+    buyerEmail: string;
     orderDate: string;
     shipToAddress: IAddress;
     deliveryMethod: string;

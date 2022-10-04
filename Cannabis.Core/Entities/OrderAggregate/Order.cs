@@ -5,16 +5,16 @@ public class Order : BaseEntity
 {
     public Order() { }
 
-    public Order(IReadOnlyList<OrderItem> orderItems, string buyerEamil, Address shipToAddress, DeliveryMethod deliveryMethod,  decimal subtotal)
+    public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress, DeliveryMethod deliveryMethod,  decimal subtotal)
     {
-        BuyerEamil = buyerEamil;
+        BuyerEmail = buyerEmail;
         ShipToAddress = shipToAddress;
         DeliveryMethod = deliveryMethod;
         OrderItems = orderItems;
         Subtotal = subtotal;
     }
 
-    public string BuyerEamil { get; set; }
+    public string BuyerEmail { get; set; }
     public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.Now;
     public Address ShipToAddress { get; set; }
     public DeliveryMethod DeliveryMethod { get; set; }

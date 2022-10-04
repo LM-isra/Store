@@ -10,7 +10,7 @@ public class OrderConfig : IEntityTypeConfiguration<Order>
     {
         builder
             .OwnsOne(o => o.ShipToAddress, a => a.WithOwner());
-        
+                        
         builder.Property(s => s.Status)
             .HasConversion(
                 o => o.ToString(),

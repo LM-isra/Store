@@ -46,7 +46,7 @@ namespace Cannabis.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("BuyerEamil")
+                    b.Property<string>("BuyerEmail")
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("DeliveryMethodId")

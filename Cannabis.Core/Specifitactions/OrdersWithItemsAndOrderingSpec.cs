@@ -5,7 +5,7 @@ namespace Cannabis.Core.Specifitactions;
 
 public class OrdersWithItemsAndOrderingSpec : BaseSpecification<Order>
 {
-    public OrdersWithItemsAndOrderingSpec(string email) : base(o => o.BuyerEamil == email)
+    public OrdersWithItemsAndOrderingSpec(string email) : base(o => o.BuyerEmail == email)
     {
         AddInclude(o => o.OrderItems);
         AddInclude(o => o.DeliveryMethod);
@@ -13,7 +13,7 @@ public class OrdersWithItemsAndOrderingSpec : BaseSpecification<Order>
     }
 
     public OrdersWithItemsAndOrderingSpec(int id, string email) 
-        : base(o => o.Id == id && o.BuyerEamil == email)
+        : base(o => o.Id == id && o.BuyerEmail == email)
     {
         AddInclude(o => o.OrderItems);
         AddInclude(o => o.DeliveryMethod);

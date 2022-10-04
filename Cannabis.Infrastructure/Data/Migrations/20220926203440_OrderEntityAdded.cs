@@ -57,7 +57,7 @@ namespace Cannabis.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    BuyerEamil = table.Column<string>(type: "TEXT", nullable: true),
+                    BuyerEmail = table.Column<string>(type: "TEXT", nullable: true),
                     OrderDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     ShipToAddress_FirstName = table.Column<string>(type: "TEXT", nullable: true),
                     ShipToAddress_LastName = table.Column<string>(type: "TEXT", nullable: true),
